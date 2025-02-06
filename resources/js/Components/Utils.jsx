@@ -8,6 +8,9 @@ export default function hasAnyPermission(permissions){
     // get all permissions from props auth
     let allPermissions = auth.permissions;
 
+    // define has permission is false
+    let hasPermission = false;
+
 
  return;
 
