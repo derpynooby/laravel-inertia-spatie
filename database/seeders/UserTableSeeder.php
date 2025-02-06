@@ -31,5 +31,8 @@ class UserTableSeeder extends Seeder
         // assign permission to role
         $role->syncPermissions($permissions);
 
+         // assign role to user
+         $user->assignRole($role);
+
     }
 }
