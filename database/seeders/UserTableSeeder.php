@@ -25,6 +25,8 @@ class UserTableSeeder extends Seeder
         // get all permissions
         $permissions = Permission::all();
 
+        // get admin role
+        $role = Role::find(1);
 
     }
 }
