@@ -22,5 +22,9 @@ class UserTableSeeder extends Seeder
             'password'  => bcrypt('password'),
         ]);
 
+        // get all permissions
+        $permissions = Permission::all();
+
+
     }
 }
