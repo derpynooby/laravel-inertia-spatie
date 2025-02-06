@@ -28,5 +28,8 @@ class UserTableSeeder extends Seeder
         // get admin role
         $role = Role::find(1);
 
+        // assign permission to role
+        $role->syncPermissions($permissions);
+
     }
 }
