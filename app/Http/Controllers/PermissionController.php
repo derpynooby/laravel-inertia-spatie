@@ -25,7 +25,8 @@ class PermissionController extends Controller
     {
         //  get permissions
         $permissions = Permission::select('id', 'name')
-
+            // search based on name, like, % the search request % if $request->search exist
+            ->when($request->search,fn($search) => $search->where('name', 'like', '%'.$request->search.'%'))
             // Arrange from the latest data
             ->latest()
             // Set 6 data per page
