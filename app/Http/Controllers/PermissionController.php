@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
@@ -71,9 +72,10 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Permission $permission)
     {
-        //
+        // render view
+        return inertia('Permissions/Edit', ['permission' => $permission]);
     }
 
     /**
