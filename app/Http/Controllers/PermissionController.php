@@ -87,8 +87,12 @@ class PermissionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Permission $permission)
     {
-        //
+        // delete permissions data
+        $permission->delete();
+
+        // render view
+        return back();
     }
 }
