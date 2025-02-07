@@ -41,7 +41,9 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        // directing to create page
+        // render view 
+        return inertia('Permissions/Create');
     }
 
     /**
