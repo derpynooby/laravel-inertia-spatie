@@ -28,6 +28,8 @@ class RoleController extends Controller
         $roles = Role::select('id', 'name')
             // getting data from relation with permissions
             ->with('permissions:id,name')
+            // Arrange from the latest data
+            ->latest()
             // Set 6 data per page
             ->paginate(6);
 
