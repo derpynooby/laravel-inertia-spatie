@@ -81,9 +81,16 @@ class PermissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+        // validate request
+        $request->validate(['name' => 'required|min:3|max:255|unique:permissions,name,'.$permission->id]);
+
+        // update permission data
+        $permission->update(['name' => $request->name]);
+
+        // render view
+        return to_route('permissions.index');
     }
 
     /**
