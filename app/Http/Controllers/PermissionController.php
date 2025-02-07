@@ -25,8 +25,11 @@ class PermissionController extends Controller
     {
         //  get permissions
         $permissions = Permission::select('id', 'name')
+
             // Arrange from the latest data
-            ->latest();
+            ->latest()
+            // Set 6 data per page
+            ->paginate(6)->withQueryString();
 
         // render view
         return inertia('Permissions/Index', ['permissions' => $permissions,'filters' => $request->only(['search'])]);
