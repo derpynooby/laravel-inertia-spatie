@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -21,9 +22,16 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // get roles
+        $roles = Role::select('id', 'name')
+            
+            // Set 6 data per page
+            ->paginate(6);
+
+        // render view
+        return inertia('Roles/Index', ['roles' => $roles,'filters' => $request->only(['search'])]);
     }
 
     /**
