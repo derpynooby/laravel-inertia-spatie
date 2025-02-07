@@ -28,6 +28,8 @@ class RoleController extends Controller
         $roles = Role::select('id', 'name')
             // getting data from relation with permissions
             ->with('permissions:id,name')
+            // search based on name, like, % the search request % if $request->search exist
+            ->when($request->search,fn($search) => $search->where('name', 'like', '%'.$request->search.'%'))
             // Arrange from the latest data
             ->latest()
             // Set 6 data per page
