@@ -26,7 +26,8 @@ class RoleController extends Controller
     {
         // get roles
         $roles = Role::select('id', 'name')
-            
+            // getting data from relation with permissions
+            ->with('permissions:id,name')
             // Set 6 data per page
             ->paginate(6);
 
