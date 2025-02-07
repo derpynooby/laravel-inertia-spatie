@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    // Adding or assigning middleware for every routes(permissions)
+    public static function middleware()
+    {
+        return [
+            new Middleware('permission:roles index', only: ['index']),
+            new Middleware('permission:roles create', only: ['create', 'store']),
+            new Middleware('permission:roles edit', only: ['edit', 'update']),
+            new Middleware('permission:roles delete', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
