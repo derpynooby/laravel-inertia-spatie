@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Routing\Controllers\Middleware;
 
+use Illuminate\Routing\Controllers\Middleware;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
     public static function middleware()
     {
-        // Adding or assigning middleware for every routes
+        // Adding or assigning middleware for every routes/permissions
         return [
             new Middleware('permission:permissions index', only: ['index']),
             new Middleware('permission:permissions create', only: ['create', 'store']),
@@ -20,9 +21,15 @@ class PermissionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //  get permissions
+        $permissions = Permission::select('id', 'name')
+            // Arrange from the latest data
+            ->latest();
+
+        // render view
+        return inertia('Permissions/Index', ['permissions' => $permissions,'filters' => $request->only(['search'])]);
     }
 
     /**
