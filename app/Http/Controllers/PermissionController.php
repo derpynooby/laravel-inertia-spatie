@@ -51,9 +51,15 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // validate request
+        $request->validate(['name' => 'required|min:3|max:255|unique:permissions']);
 
+        // create new permission data
+        Permission::create(['name' => $request->name]);
+
+        // render view
+        return to_route('permissions.index');
+    }
     /**
      * Display the specified resource.
      */
