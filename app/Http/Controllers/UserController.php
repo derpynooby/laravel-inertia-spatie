@@ -26,9 +26,12 @@ class UserController extends Controller
     {
         // get all users with roles
         $users = User::with('roles')
+            // search based on name, like, % the search request % if $request->search exist
+            ->when(request('search'), fn($query) => $query->where('name', 'like', '%'.request('search').'%'))
             // arrange data from the latest
-            ->latest();
+            ->latest()
             // set 6 data per page
+            ->paginate(6);
 
         // render view
         return inertia('Users/Index', ['users' => $users,'filters' => $request->only(['search'])]);
