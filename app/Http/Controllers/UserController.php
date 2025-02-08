@@ -128,8 +128,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        // delete user data
+        $user->delete();
+
+        // render view
+        return back();
     }
 }
