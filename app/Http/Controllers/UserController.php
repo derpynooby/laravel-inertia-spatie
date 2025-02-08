@@ -103,9 +103,26 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        // validate request
+        $request->validate([
+            'name' => 'required|min:3|max:255',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'selectedRoles' => 'required|array|min:1',
+        ]);
+
+        // update user data
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        // attach roles
+        $user->syncRoles($request->selectedRoles);
+
+        // render view
+        return to_route('users.index');
     }
 
     /**
