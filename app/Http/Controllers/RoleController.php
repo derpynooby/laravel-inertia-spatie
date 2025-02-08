@@ -6,6 +6,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -44,9 +45,11 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+       
+        // return $permissions;
+        // render view
+        return inertia('Roles/Create', ['permissions' => $permissions]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
