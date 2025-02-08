@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -43,7 +44,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+         // get roles
+         $roles = Role::latest()->get();
+         // render view
+         return inertia('Users/Create', ['roles' => $roles]);
     }
 
     /**
