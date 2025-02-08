@@ -45,7 +45,17 @@ class RoleController extends Controller
      */
     public function create()
     {
-       
+        // get permissions
+        // $permissions = Permission::all();
+        $data = Permission::orderBy('name')->pluck('name', 'id');
+        $collection = collect($data);
+        $permissions = $collection->groupBy(function ($item, $key) {
+            // Seperate from array to strings
+            $words = explode(' ', $item);
+
+            // Taking the first string / word
+            return $words[0];
+        });
         // return $permissions;
         // render view
         return inertia('Roles/Create', ['permissions' => $permissions]);
