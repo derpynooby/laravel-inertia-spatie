@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -21,10 +22,17 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // get all users with roles
+        $users = User::with('roles')
+        // arrange data from the latest
+            ->latest();
+
+        // render view
+        return inertia('Users/Index', ['users' => $users,'filters' => $request->only(['search'])]);
     }
+
 
     /**
      * Show the form for creating a new resource.
