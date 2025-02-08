@@ -115,9 +115,22 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        // validate request
+        $request->validate([
+            'name' => 'required|min:3|max:255|unique:roles,name,'.$role->id,
+            'selectedPermissions' => 'required|array|min:1',
+        ]);
+
+        // update role data
+        $role->update(['name' => $request->name]);
+
+        // give permissions to role
+        $role->syncPermissions($request->selectedPermissions);
+
+        // render view
+        return to_route('roles.index');
     }
 
     /**
