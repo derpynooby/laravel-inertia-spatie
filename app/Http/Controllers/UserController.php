@@ -26,8 +26,9 @@ class UserController extends Controller
     {
         // get all users with roles
         $users = User::with('roles')
-        // arrange data from the latest
+            // arrange data from the latest
             ->latest();
+            // set 6 data per page
 
         // render view
         return inertia('Users/Index', ['users' => $users,'filters' => $request->only(['search'])]);
