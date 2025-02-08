@@ -88,9 +88,16 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        // get roles
+        $roles = Role::where('name', '!=', 'super-admin')->get();
+
+        // load roles
+        $user->load('roles');
+
+        // render view
+        return inertia('Users/Edit', ['user' => $user, 'roles' => $roles]);
     }
 
     /**
