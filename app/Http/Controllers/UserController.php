@@ -51,7 +51,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // validate request
+         $request->validate([
+            'name' => 'required|min:3|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:4',
+            'selectedRoles' => 'required|array|min:1',
+        ]);
+
+        // create user
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        // attach roles
+        $user->assignRole($request->selectedRoles);
+
+        // render view
+        return to_route('users.index');
     }
 
     /**
