@@ -92,9 +92,24 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Role $role)
     {
-        //
+        // get permissions
+        $data = Permission::orderBy('name')->pluck('name', 'id');
+        $collection = collect($data);
+        $permissions = $collection->groupBy(function ($item, $key) {
+            // Seperate from array to strings
+            $words = explode(' ', $item);
+
+            // Taking the first string / word
+            return $words[0];
+        });
+
+        // load permissions
+        $role->load('permissions');
+
+        // render view
+        return inertia('Roles/Edit', ['role' => $role, 'permissions' => $permissions]);
     }
 
     /**
