@@ -7,7 +7,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller
+class PermissionController extends Controller implements HasMiddleware
 {
     public static function middleware()
     {

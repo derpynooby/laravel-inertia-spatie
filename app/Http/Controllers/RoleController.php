@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class RoleController extends Controller
+class RoleController extends Controller implements HasMiddleware
 {
     // Adding or assigning middleware for every routes(permissions)
     public static function middleware()
