@@ -65,7 +65,20 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // validate request
+         $request->validate([
+            'name' => 'required|min:3|max:255|unique:roles',
+            'selectedPermissions' => 'required|array|min:1',
+        ]);
+
+        // create new role data
+        $role = Role::create(['name' => $request->name]);
+
+        // give permissions to role
+        $role->givePermissionTo($request->selectedPermissions);
+
+        // render view
+        return to_route('roles.index');
     }
 
     /**
