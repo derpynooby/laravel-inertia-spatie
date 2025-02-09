@@ -1,3 +1,12 @@
+/**
+ * This file contains the Dashboard component
+ * It displays the main dashboard page for authenticated users
+ * 
+ * Imports:
+ * - AuthenticatedLayout: Layout component for authenticated pages
+ * - Head: Inertia.js utility for managing page metadata/title
+ */
+
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 

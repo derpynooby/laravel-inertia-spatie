@@ -1,10 +1,26 @@
+/**
+ * This file contains the Create component for managing permissions
+ * It handles creating new permissions in the system
+ */
+
+// Import React library for building UI components
 import React from 'react'
+
+// Import layout component for authenticated pages
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+
+// Import reusable container component
 import Container from '@/Components/Container';
+
+// Import Inertia utilities for form handling and navigation
 import { Head, useForm } from '@inertiajs/react';
+
+// Import reusable form components
 import Input from '@/Components/Input';
 import Button from '@/Components/Button';
 import Card from '@/Components/Card';
+
+// Import SweetAlert2 for showing notifications
 import Swal from 'sweetalert2';
 export default function Create({auth}) {
 

@@ -1,28 +1,44 @@
+/**
+ * Import necessary components and functions
+ */
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
-import NavLink from "@/Components/NavLink";
+import NavLink from "@/Components/NavLink"; 
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
 import { useState } from "react";
 import hasAnyPermission from "@/Utils/Permissions";
+
+/**
+ * Main layout component for authenticated pages
+ * @param {Object} props - Component props
+ * @param {ReactNode} props.header - Page header content
+ * @param {ReactNode} props.children - Main page content
+ */
 export default function AuthenticatedLayout({ header, children }) {
+    // Get currently logged in user data from Inertia page props
     const user = usePage().props.auth.user;
 
+    // State to control mobile navigation menu visibility
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+            {/* Navigation Bar */}
             <nav className="border-b border-gray-100 bg-white dark:bg-gray-800">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
+                        {/* Logo and Desktop Navigation Menu */}
                         <div className="flex">
+                            {/* Application Logo */}
                             <div className="flex shrink-0 items-center">
                                 <Link href="/">
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-500" />
                                 </Link>
                             </div>
 
+                            {/* Desktop Navigation Menu */}
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
                                     href={route("dashboard")}
@@ -31,6 +47,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                     Dashboard
                                 </NavLink>
 
+                                {/* Permissions Menu - only shown if user has access */}
                                 {hasAnyPermission(["permissions index"]) && (
                                     <NavLink
                                         href={route("permissions.index")}
@@ -39,6 +56,8 @@ export default function AuthenticatedLayout({ header, children }) {
                                         Permissions
                                     </NavLink>
                                 )}
+
+                                {/* Roles Menu - only shown if user has access */}
                                 {hasAnyPermission(["roles index"]) && (
                                     <NavLink
                                         href={route("roles.index")}
@@ -47,15 +66,17 @@ export default function AuthenticatedLayout({ header, children }) {
                                         Roles
                                     </NavLink>
                                 )}
+
+                                {/* Users Menu - only shown if user has access */}
                                 {hasAnyPermission(['users index']) &&
                                     <NavLink href={route('users.index')} active={route().current('users*')}>
                                         Users
                                     </NavLink>
                                 }
-
                             </div>
                         </div>
 
+                        {/* Desktop User Dropdown Menu */}
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
                             <div className="relative ms-3">
                                 <Dropdown>
@@ -101,6 +122,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
                         </div>
 
+                        {/* Mobile Menu Button */}
                         <div className="-me-2 flex items-center sm:hidden">
                             <button
                                 onClick={() =>
@@ -144,6 +166,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
                 </div>
 
+                {/* Mobile Navigation Menu */}
                 <div
                     className={
                         (showingNavigationDropdown ? "block" : "hidden") +
@@ -180,9 +203,9 @@ export default function AuthenticatedLayout({ header, children }) {
                                 Users
                             </ResponsiveNavLink>
                         }
-
                     </div>
 
+                    {/* Mobile User Information */}
                     <div className="border-t border-gray-200 pb-1 pt-4">
                         <div className="px-4">
                             <div className="text-base font-medium text-gray-800">
@@ -209,6 +232,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 </div>
             </nav>
 
+            {/* Page Header */}
             {header && (
                 <header className="bg-white shadow dark:bg-gray-800">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -217,6 +241,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 </header>
             )}
 
+            {/* Main Content */}
             <main>{children}</main>
         </div>
     );

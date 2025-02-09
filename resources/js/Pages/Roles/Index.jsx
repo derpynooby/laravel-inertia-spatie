@@ -1,11 +1,33 @@
+/**
+ * This file contains the Index component for managing roles
+ * It displays a list of all roles in the system with their associated permissions
+ */
+
+// Import React library for building UI components
 import React from "react";
+
+// Import layout component for authenticated pages
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+
+// Import reusable container component
 import Container from "@/Components/Container";
+
+// Import reusable table components
 import Table from "@/Components/Table";
+
+// Import reusable button component
 import Button from "@/Components/Button";
+
+// Import reusable pagination component
 import Pagination from "@/Components/Pagination";
+
+// Import Inertia utilities for page management
 import { Head, usePage } from "@inertiajs/react";
+
+// Import reusable search component
 import Search from "@/Components/Search";
+
+// Import utility for checking user permissions
 import hasAnyPermission from "@/Utils/Permissions";
 export default function Index({ auth }) {
     // destruct permissions props

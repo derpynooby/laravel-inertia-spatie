@@ -1,3 +1,11 @@
+/**
+ * Import required dependencies:
+ * - React: Core React library for building components
+ * - Select: React-select library for customizable select dropdowns
+ * 
+ * This component wraps react-select to provide a reusable multi-select dropdown
+ * with custom styling and default options.
+ */
 import React from 'react'
 import Select from 'react-select'
 

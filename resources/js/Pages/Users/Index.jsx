@@ -1,11 +1,25 @@
+/**
+ * This file contains the Users Index page component
+ * It displays a list of users in a table with search and pagination
+ */
+
+// Import React core
 import React from "react";
+
+// Import layout components
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Container from "@/Components/Container";
+
+// Import UI components
 import Table from "@/Components/Table";
 import Button from "@/Components/Button";
 import Pagination from "@/Components/Pagination";
-import { Head, usePage } from "@inertiajs/react";
 import Search from "@/Components/Search";
+
+// Import Inertia utilities
+import { Head, usePage } from "@inertiajs/react";
+
+// Import permission helper
 import hasAnyPermission from "@/Utils/Permissions";
 export default function Index({ auth }) {
     // destruct users props

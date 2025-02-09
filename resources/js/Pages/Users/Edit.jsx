@@ -1,3 +1,17 @@
+/**
+ * Import required dependencies and components
+ * 
+ * React - Core React library and hooks (useEffect, useState)
+ * AuthenticatedLayout - Layout component for authenticated pages
+ * Container - Container component for layout
+ * Head, useForm, usePage - Inertia.js utilities for forms and page data
+ * Input - Reusable input component
+ * Button - Reusable button component 
+ * Card - Reusable card component
+ * Swal - SweetAlert2 for notifications
+ * Select2 - Custom select component
+ */
+
 import React ,{useEffect, useState }from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Container from '@/Components/Container';

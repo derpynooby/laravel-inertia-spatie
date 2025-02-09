@@ -1,3 +1,8 @@
+/**
+ * Import required components from Inertia.js React adapter:
+ * - Head: Component for managing page metadata/title
+ * - Link: Component for client-side navigation between pages
+ */
 import { Head, Link } from '@inertiajs/react';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {

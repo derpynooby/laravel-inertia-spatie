@@ -1,11 +1,27 @@
+/**
+ * This file contains the Edit component for managing roles
+ * It handles editing existing roles with associated permissions in the system
+ */
+
+// Import React library for building UI components
 import React from "react";
+
+// Import layout component for authenticated pages
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+
+// Import reusable container component
 import Container from "@/Components/Container";
+
+// Import Inertia utilities for form handling and navigation
 import { Head, useForm, usePage } from "@inertiajs/react";
+
+// Import reusable form components
 import Input from "@/Components/Input";
 import Button from "@/Components/Button";
 import Card from "@/Components/Card";
 import Checkbox from "@/Components/Checkbox";
+
+// Import SweetAlert2 for showing notifications
 import Swal from "sweetalert2";
 export default function Edit({ auth }) {
     // destruct permissions from usepage props

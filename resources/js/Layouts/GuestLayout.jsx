@@ -1,3 +1,8 @@
+/**
+ * Import required components and utilities:
+ * - ApplicationLogo: Component for displaying the application logo
+ * - Link: Inertia.js component for client-side navigation
+ */
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
 
