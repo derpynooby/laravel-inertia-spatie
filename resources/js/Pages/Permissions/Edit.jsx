@@ -37,7 +37,7 @@ export default function Edit({auth}) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit Permission</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Edit Permission</h2>}
         >
             <Head title={'Edit Permissions'}/>
             <Container>

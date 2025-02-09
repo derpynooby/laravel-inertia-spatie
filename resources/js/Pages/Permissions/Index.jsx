@@ -15,7 +15,7 @@ export default function Index({auth}) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Permissions</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-600 dark:text-gray-400 leading-tight">Permissions</h2>}
         >
             <Head title={'Permissions'}/>
             <Container>
