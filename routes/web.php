@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/users', UserController::class);
 
     // posts route
-        Route::resource('/post', PostController::class);
+        Route::resource('/posts', PostController::class);
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

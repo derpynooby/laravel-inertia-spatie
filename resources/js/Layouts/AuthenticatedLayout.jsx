@@ -73,6 +73,16 @@ export default function AuthenticatedLayout({ header, children }) {
                                         Users
                                     </NavLink>
                                 }
+
+                                {/* Posts Menu - only shown if user has access */}
+                                {hasAnyPermission(["posts index"]) && (
+                                    <NavLink
+                                        href={route("posts.index")}
+                                        active={route().current("posts*")}
+                                    >
+                                        Posts
+                                    </NavLink>
+                                )}
                             </div>
                         </div>
 
@@ -203,6 +213,15 @@ export default function AuthenticatedLayout({ header, children }) {
                                 Users
                             </ResponsiveNavLink>
                         }
+
+                        {hasAnyPermission(["posts index"]) && (
+                            <ResponsiveNavLink
+                                href={route("posts.index")}
+                                active={route().current("posts*")}
+                            >
+                                Posts
+                            </ResponsiveNavLink>
+                        )}
                     </div>
 
                     {/* Mobile User Information */}
