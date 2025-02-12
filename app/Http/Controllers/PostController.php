@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 
 class PostController extends Controller
 {
+    public static function middleware()
+    {
+        // Adding or assigning middleware for every routes/permissions
+        return [
+            new Middleware('permission:posts index', only: ['index']),
+            new Middleware('permission:posts create', only: ['create', 'store']),
+            new Middleware('permission:posts edit', only: ['edit', 'update']),
+            new Middleware('permission:posts delete', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
