@@ -49,12 +49,13 @@ export default function Index({auth}) {
                         <Search url={route('posts.index')} placeholder={'Search posts data by name...'} filter={filters}/>
                     </div>
                 </div>
-                <Table.Card title={'Post'}>
+                <Table.Card title={'Posts'}>
                     <Table>
                         <Table.Thead>
                             <tr>
                                 <Table.Th>#</Table.Th>
-                                <Table.Th>Posts Name</Table.Th>
+                                <Table.Th>Title</Table.Th>
+                                <Table.Th>Post</Table.Th>
                                 <Table.Th>Action</Table.Th>
                             </tr>
                         </Table.Thead>
@@ -62,7 +63,8 @@ export default function Index({auth}) {
                             {posts.data.map((post, i) => (
                                 <tr key={i}>
                                     <Table.Td>{++i + (posts.current_page-1) * posts.per_page}</Table.Td>
-                                    <Table.Td>{post.name}</Table.Td>
+                                    <Table.Td>{post.title}</Table.Td>
+                                    <Table.Td>{post.post}</Table.Td>
                                     <Table.Td>
                                         <div className='flex items-center gap-2'>
                                             {hasAnyPermission(['posts edit']) &&
