@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -53,10 +54,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // declare user_id adn fill using authenticated user
+        $user_id = Auth::user()->id;
+
         // validate request
-        $request->validate(['user_id' => 'required|min:3|max:255|integer|exists:users,id']);
+        $user_id->validate(['user_id' => 'required|min:3|max:255|integer|exists:users,id']);
         $request->validate(['title' => 'required|min:3|max:255']);
         $request->validate(['post' => 'required|min:3|max:255']);
+
+        // merge user_id to request
+        $request->merge(['user_id' => $user_id]);
 
         // create new post data
         Post::create(
@@ -92,6 +99,12 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        // declare user_id adn fill using authenticated user
+        $user_id = Auth::user()->id;
+
+        // merge user_id to request
+        $request->merge(['user_id' => $user_id]);
+        
         // validate request
         $request->validate(
             [
