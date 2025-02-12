@@ -54,12 +54,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // validate request
+        $request->validate(['user_id' => 'required|min:3|max:255|integer|exists:users,id']);
         $request->validate(['title' => 'required|min:3|max:255']);
         $request->validate(['post' => 'required|min:3|max:255']);
 
         // create new post data
         Post::create(
             [
+            'user_id' => $request->user_id,
             'title' => $request->title,
             'post' => $request->post
         ]);
@@ -90,7 +92,24 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        // validate request
+        $request->validate(
+            [
+                'user_id' => 'required|min:3|max:255|integer|exists:users,id',
+                'title' => 'required|min:3|max:255,'.$post->id,
+                'post' => 'required|min:3|max:255'
+            ]);
+
+        // update post data
+        $post->update(
+        [
+            'user_id' => $request->user_id,
+            'title' => $request->title,
+            'post' => $request->post
+        ]);
+
+        // render view
+        return to_route('posts.index');
     }
 
     /**
