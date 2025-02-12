@@ -10,9 +10,19 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //  get posts
+        $posts = Post::select('id', 'title')
+            // search based on name, like, % the search request % if $request->search exist
+            ->when($request->search,fn($search) => $search->where('title', 'like', '%'.$request->search.'%'))
+            // Arrange from the latest data
+            ->latest()
+            // Set 6 data per page
+            ->paginate(6)->withQueryString();
+
+        // render view
+        return inertia('Posts/Index', ['posts' => $posts,'filters' => $request->only(['search'])]);
     }
 
     /**
