@@ -18,6 +18,7 @@ class PostController extends Controller
             new Middleware('permission:posts delete', only: ['destroy']),
         ];
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -41,8 +42,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        // directing to create page
+        // render view 
+        return inertia('Posts/Create');
     }
+
 
     /**
      * Store a newly created resource in storage.
