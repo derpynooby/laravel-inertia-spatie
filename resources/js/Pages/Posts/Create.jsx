@@ -26,7 +26,8 @@ export default function Create({auth}) {
 
     // define state with helper inertia
     const { data, setData, post, errors } = useForm({
-        name : ''
+        title : '',
+        post : ''
     });
 
     // define method handleStoreData

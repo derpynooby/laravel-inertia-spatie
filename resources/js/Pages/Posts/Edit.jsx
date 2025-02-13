@@ -4,7 +4,7 @@
  */
 
 // Import React library for building UI components
-import React from 'react'
+import React from 'react';
 
 // Import layout component for authenticated pages
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
@@ -22,22 +22,23 @@ import Card from '@/Components/Card';
 
 // Import SweetAlert2 for showing notifications
 import Swal from 'sweetalert2';
-export default function Edit({auth}) {
 
-    // destruct permissions from usepage props
-    const { permission } = usePage().props;
+export default function Edit({ auth }) {
+    // Destruct permissions from usepage props
+    const { posts } = usePage().props;
 
-    // define state with helper inertia
+    // Define state with helper inertia
     const { data, setData, post, errors } = useForm({
-        name : post.name,
+        title: posts.title,
+        post: posts.post,
         _method: 'put'
     });
 
-    // define method handleUpdateData
+    // Define method handleUpdateData
     const handleUpdateData = async (e) => {
         e.preventDefault();
 
-        post(route('posts.update', post.id), {
+        post(route('posts.update', posts.id), {
             onSuccess: () => {
                 Swal.fire({
                     title: 'Success!',
@@ -45,31 +46,31 @@ export default function Edit({auth}) {
                     icon: 'success',
                     showConfirmButton: false,
                     timer: 1500
-                })
+                });
             }
         });
-    }
+    };
 
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Edit Post</h2>}
         >
-            <Head title={'Edit Posts'}/>
+            <Head title={'Edit Posts'} />
             <Container>
                 <Card title={'Edit post'}>
                     <form onSubmit={handleUpdateData}>
                         <div className='mb-4'>
-                            <Input label={'Title'} type={'text'} value={data.title} onChange={e => setData('title', e.target.value)} errors={errors.title} placeholder="Input post title.."/>
-                            <Input label={'Post'} type={'text'} value={data.post} onChange={e => setData('post', e.target.value)} errors={errors.post} placeholder="Input post.."/>
+                            <Input label={'Title'} type={'text'} value={data.title} onChange={e => setData('title', e.target.value)} errors={errors.title} placeholder="Input post title.." />
+                            <Input label={'Post'} type={'text'} value={data.post} onChange={e => setData('post', e.target.value)} errors={errors.post} placeholder="Input post.." />
                         </div>
                         <div className='flex items-center gap-2'>
                             <Button type={'submit'} />
-                            <Button type={'cancel'} url={route('posts.index')}/>
+                            <Button type={'cancel'} url={route('posts.index')} />
                         </div>
                     </form>
                 </Card>
             </Container>
         </AuthenticatedLayout>
-    )
+    );
 }
