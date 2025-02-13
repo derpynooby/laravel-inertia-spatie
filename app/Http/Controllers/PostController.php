@@ -26,7 +26,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         //  get posts
-        $posts = Post::select('id', 'title')
+        $posts = Post::select('id', 'title','post')
             // search based on name, like, % the search request % if $request->search exist
             ->when($request->search,fn($search) => $search->where('title', 'like', '%'.$request->search.'%'))
             // Arrange from the latest data
@@ -57,13 +57,15 @@ class PostController extends Controller
         // declare user_id adn fill using authenticated user
         $user_id = Auth::user()->id;
 
-        // validate request
-        $user_id->validate(['user_id' => 'required|min:3|max:255|integer|exists:users,id']);
-        $request->validate(['title' => 'required|min:3|max:255']);
-        $request->validate(['post' => 'required|min:3|max:255']);
-
         // merge user_id to request
         $request->merge(['user_id' => $user_id]);
+
+        // validate request
+        $request->validate([
+            'user_id' => 'required|integer|exists:users,id',
+            'title' => 'required|min:3|max:255',
+            'post' => 'required|min:3|max:255',
+        ]);
 
         // create new post data
         Post::create(
@@ -91,7 +93,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         // render view
-        return inertia('Posts/Edit', ['post' => $post]);
+        return inertia('Posts/Edit', ['posts' => $post]);
     }
 
     /**
@@ -105,13 +107,15 @@ class PostController extends Controller
         // merge user_id to request
         $request->merge(['user_id' => $user_id]);
         
+        // dd($request);
         // validate request
         $request->validate(
             [
-                'user_id' => 'required|min:3|max:255|integer|exists:users,id',
-                'title' => 'required|min:3|max:255,'.$post->id,
+                'user_id' => 'required|integer|exists:users,id',
+                'title' => 'required|min:3|max:255',
                 'post' => 'required|min:3|max:255'
             ]);
+            
 
         // update post data
         $post->update(
